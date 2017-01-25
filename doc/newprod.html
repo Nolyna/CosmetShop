@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<link rel="import" href="header.html">
+
+<body>
+
+    <div class="window">
+
+        <!-- header of the app goes inside -->
+        <header class="toolbar toolbar-header mainheader">
+            <h1 class="title mainh1">Ajouter un nouveau produit</h1>
+        </header>
+
+        <!-- Your app's content goes inside .window-content -->
+        <div class="window-content">
+
+            <div class="pane-group">
+                <div class="pane">
+
+                    <!-- formulaire d'ajout des produits-->
+                    <form id="ajoutprod">
+                        <table>
+                            <tr>
+                                <td><label for="nom"> Nom: </label> </td>
+                                <td> <input id="nom" type="text"> </td>
+                                <td id="error"></td>
+                            </tr>
+                            <tr>
+                                <td> <label for="type"> Type: </label></td>
+                                <td> <select id="type"><option value="0"> Choisir un type</option></select></td>
+                                </select>
+                                </td>
+                                <td> <input type="button" id="Atype" value="Ajouter une type"></td>
+                            </tr>
+                            <tr>
+                                <td> <label for="forme"> Forme: </label></td>
+                                <td> <select id="forme"><option value="0"> Choisir une forme</option></select> </td>
+                                <td> <input type="button" id="Aforme" value="Ajouter une forme"></td>
+                            </tr>
+                            <tr>
+                                <td> <label for="descr"> Description: </label></td>
+                                <td> <textarea id="descr"></textarea> </td>
+                            </tr>
+                            <tr>
+                                <td> <label for="qte"> Quantit&eacute;:</label></td>
+                                <td> <input id="qte" type="number" min="0" value="0"> </td>
+                            </tr>
+                            <tr>
+                                <td> <label for="achat"> Prix d'achat: </label></td>
+                                <td> <input id="achat" type="text"> </td>
+                                <td id="error2"></td>
+                            </tr>
+                            <tr>
+                                <td> <label for="vente"> Prix de vente:</label></td>
+                                <td> <input id="vente" type="text"> </td>
+                                <td id="error3"></td>
+                            </tr>
+                            <tr>
+                                <td> <label for="dexp">Date d'expiration:</td>
+                                <td> <input id="dexp" type="date"> </td>
+                            </tr>
+                            <tr>
+                                <td><label for="fournisseur"> Fournisseur:</label></td>
+                                <td> <select id="fournisseur">
+                                        <option value="0"> Choisir un fournisseur</option>
+                                        <option value="0"> No fournisseur </option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td><br></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input id="submit" type="submit" value="Ajouter"> <input type="reset"> <input id="close" type="button" value="Fermer"></td>
+                            </tr>
+                        </table>
+                    </form>
+
+                </div>
+                <!-- end pane -->
+            </div>
+            <!-- end pane-group -->
+        </div>
+        <!-- window-content -->
+
+        <!-- footer of the app goes inside -->
+        <footer class="toolbar toolbar-footer">
+            <h1 class="title">Footer</h1>
+        </footer>
+    </div>
+    <!-- end window -->
+
+    <!-- Jquery <script> insertion-->
+    <script>
+        window.$ = window.jQuery = require('../scripts/jquery.js');
+    </script>
+    <!-- <script> require("../scripts/vue.js")</script> -->
+    <script src="../scripts/bdd.js"></script>
+    <script src="../scripts/newprod.js"></script>
+</body>
+
+</html>

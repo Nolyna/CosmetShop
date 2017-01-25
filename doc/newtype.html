@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <title> PRODUITS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../css/photon.min.css">
+</head>
+
+<body>
+
+    <div class="window">
+        <header class="toolbar toolbar-header">
+            <h1 class="title">Cosmet Shop</h1>
+        </header>
+
+        <div class="window-content">
+
+            <div class="pane-group">
+                <div class="pane">
+
+                    <h3> Ajouter un type de produit</h3>
+                    <br>
+
+                    <form id="add-type">
+                        <table>
+                            <tr>
+                                <td><label for="name">Nom: </label></td>
+                                <td><input type="text" id="name"></td>
+                                <td id="error"></td>
+                            </tr>
+                            <tr>
+                                <td><br></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="2"><input type="submit" value="Ajouter"> <input type="reset" value="Annuler"></td>
+                            </tr>
+                        </table>
+                    </form>
+
+                </div>
+                <!-- end pane -->
+            </div>
+            <!-- end pane-group -->
+        </div>
+        <!-- end window-content -->
+    </div>
+    <!-- end app .window -->
+
+
+    <!-- Jquery <script> insertion-->
+    <script>
+        window.$ = window.jQuery = require('../scripts/jquery.js');
+    </script>
+
+    <script type="text/javascript">
+        const ipcRenderer = require('electron').ipcRenderer;
+        $(document).ready(function() {
+            var x;
+
+            ipcRenderer.on('genretypeAdd', function(Object, arg) {
+                x = arg;
+            })
+
+            $("#add-type").submit(
+                function(event) {
+                    if ($("#name").val() == '') {
+                        $("#error").text('Veuillez remplir le champ').show().fadeOut(3000);
+                        event.preventDefault();
+                    } else {
+                        ipcRenderer.send('addtype', $("#name").val());
+                        if (x === 'P') {
+                            ipcRenderer.send('update-prodselect');
+                            alert('Ajout effectu\351e');
+                            ipcRenderer.send('display-addtype1');
+                        } else {
+                            ipcRenderer.send('update-typeforme');
+                            alert('Ajout effectu\351e');
+                            event.preventDefault();
+                            $("#name").val('');
+                        }
+                        ipcRenderer.send('save-date');
+                    }
+                });
+
+            $(":reset").click(
+                function(event) {
+                    ipcRenderer.send('display-addtype1');
+                });
+        });
+    </script>
+
+</body>
+
+</html>

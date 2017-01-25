@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <title>TYPE AND FORME </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../css/photon.min.css">
+    <link rel="stylesheet" href="../css/default.css">
+</head>
+
+<body>
+    <div class="window">
+
+        <!-- header of the app goes inside 
+        <header class="toolbar toolbar-header">
+            <h1 class="title">Cosmet Shop</h1>
+        </header-->
+
+        <!-- Your app's content goes inside .window-content -->
+        <div class="window-content">
+
+            <div class="pane-group">
+                <div class="pane">
+
+                    <!-- Afficher la liste des formes-->
+                    <h1 id="btype" class="title mainh1"> </h1>
+                    <table class="listeType">
+                        <thead>
+                            <tr>
+                                <th>N </th>
+                                <th>Nom </th>
+                                <th colspan="2">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <td valign="bottom" align="right" colspan="4"><button id="addType"> Ajouter un type de produit </button></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    </br>
+
+                    <!-- Afficher la liste des formes-->
+                    <h1 id="bforme" class="title mainh1"> </h1>
+                    <table class="listeForme">
+                        <thead>
+                            <tr>
+                                <th>N </th>
+                                <th>Nom </th>
+                                <th colspan="2">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <td valign="bottom" align="right" colspan="4"><button id="addForme"> Ajouter une forme de produit </button></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+
+
+
+                    <a class="button backbutton" id="retour" href="../index.html"> Retour &agrave; la page principale </a>
+
+
+                </div>
+                <!-- end pane -->
+            </div>
+            <!-- end pane-group -->
+        </div>
+        <!-- window-content -->
+
+        <!-- footer of the app goes inside -->
+        <footer class="toolbar toolbar-footer">
+            <h1 class="title">Footer</h1>
+        </footer>
+    </div>
+    <!-- end window -->
+
+    <!-- Jquery <script> insertion-->
+    <script>
+        window.$ = window.jQuery = require('../scripts/jquery.js');
+
+        function deletes(id, nom, type) {
+            var dialog = confirm("\312tes vous s\373re de vouloir supprimer " + nom + " ?");
+            if (dialog == true) {
+                if (type == 'T') {
+                    ipcRenderer.send('delete-Type', id);
+                } else {
+                    ipcRenderer.send('delete-forme', id);
+                }
+                ipcRenderer.send('update-typeforme')
+
+                alert('Suppression effectu\351e ');
+            }
+        }
+
+        function modify(id, type) {
+            if (type == 'T') {
+                ipcRenderer.send('selectType', id);
+                ipcRenderer.send('display-changeTyFo', 'T');
+            } else {
+                ipcRenderer.send('display-changeTyFo', 'F');
+                ipcRenderer.send('selectForme', id);
+            }
+        }
+    </script>
+    <!-- <script> require("../scripts/vue.js")</script> -->
+    <script src="../scripts/typeandforme.js"></script>
+
+</body>
+
+</html>

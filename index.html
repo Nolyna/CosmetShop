@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<link rel="import" href="doc/header.html">
+
+<body>
+    <!-- Wrap your entire app inside .window -->
+    <div class="window">
+
+        <!-- header of the app goes inside -->
+        <header class="toolbar toolbar-header mainheader">
+            <h1 class="title mainh1">Cosmet Shop</h1>
+        </header>
+
+        <!-- Your app's content goes inside .window-content -->
+        <div class="window-content">
+
+            <div class="pane-group">
+                <div class="pane">
+
+                    <nav id="menu" class="nav">
+                        <ul>
+                            <li>
+                                <a href="doc/products.html" title=""><span class="icon"> <i aria-hidden="true"  class="icon-barcode"></i></span><span>PRODUITS</span></a>
+                            </li>
+                            <li>
+                                <a href="doc/home.html" title=""><span class="icon"> <i aria-hidden="true" class="icon-home3"></i></span><span>MAISON</span></a>
+                            </li>
+                            <li>
+                                <a href="doc/store.html" title=""><span  class="icon"><i  aria-hidden="true" class="icon-office"></i></span><span>MAGASIN</span></a>
+                            </li>
+                            <li>
+                                <a href="index.html" title=""><span  class="icon"><i  aria-hidden="true" class="icon-file-text2"></i></span><span>COMMANDE/LIVRAISON</span></a>
+                            </li>
+                            <li>
+                                <a href="doc/fournisseur.html" title=""><span  class="icon"><i  aria-hidden="true" class="icon-user-tie"></i></span><span>FOURNISSEURS</span></a>
+                            </li>
+                            <li>
+                                <a href="doc/typeandforme.html" title=""><span  class="icon"><i  aria-hidden="true" class="icon-leaf"></i></span><span>TYPE/FORME</span></a>
+                            </li>
+                            <li>
+                                <a href="#" title=""><span  class="icon"><i  aria-hidden="true" class="icon-stats-dots"></i></span><span>STATISTIC</span></a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+                <!-- end pane -->
+            </div>
+            <!-- end pane-group -->
+
+        </div>
+        <!-- window-content -->
+
+        <!-- footer of the app goes inside -->
+        <footer class="toolbar toolbar-footer">
+            <h1 class="title">Footer</h1>
+        </footer>
+    </div>
+    <!-- end window -->
+
+    <!-- Jquery <script> insertion-->
+    <script>
+        window.$ = window.jQuery = require('./scripts/jquery.js');
+    </script>
+</body>
+
+</html>

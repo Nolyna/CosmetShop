@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <title>TYPE AND FORME </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../css/photon.min.css">
+</head>
+
+<body>
+    <div class="window">
+
+        <!-- header of the app goes inside -->
+        <header class="toolbar toolbar-header">
+            <h1 class="title">Cosmet Shop</h1>
+        </header>
+
+        <!-- Your app's content goes inside .window-content -->
+        <div class="window-content">
+
+            <div class="pane-group">
+                <div class="pane">
+
+                    <button id="fermer"> Fermer </button>
+
+                </div>
+                <!-- end pane -->
+            </div>
+            <!-- end pane-group -->
+        </div>
+        <!-- window-content -->
+
+        <!-- footer of the app goes inside -->
+        <footer class="toolbar toolbar-footer">
+            <h1 class="title">Footer</h1>
+        </footer>
+    </div>
+    <!-- end window -->
+
+    <!-- Jquery <script> insertion-->
+    <script>
+        window.$ = window.jQuery = require('../scripts/jquery.js');
+        const ipcRenderer = require('electron').ipcRenderer;
+
+        $("#fermer").click(
+            function(event) {
+                ipcRenderer.send('display-detailProduit');
+            }
+        );
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+
+    <title> FOURNISSEUR </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../css/photon.min.css">
+</head>
+
+<body>
+
+    <!-- Wrap your entire app inside .window -->
+    <div class="window">
+
+        <!-- Wrap header inside  -->
+        <header class="toolbar toolbar-header">
+            <h1 class="title">Cosmet Shop</h1>
+        </header>
+
+        <div class="window-content">
+
+            <div class="pane-group">
+                <div class="pane">
+
+                    <h3 id="bonjour"> </h3>
+                    <br>
+
+                    <!-- Formulaire d'ajout des fournisseurs -->
+                    <form id="ajoutfournisseur">
+                        <table>
+                            <tr>
+                                <td><label for="nom"> Nom: </label></td>
+                                <td><input type="text" id="nom" autofocus></td>
+                                <td id="error1"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="pnom"> Prenom: </label></td>
+                                <td><input type="text" id="pnom" autofocus></td>
+                                <td id="error4"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="email"> Email: </label></td>
+                                <td><input type="email" id="email"></td>
+                                <td id="error2"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="phone"> Num&eacute;ro de t&eacute;l&eacute;phone: </label></td>
+                                <td><input type="tel" id="phone"></td>
+                                <td id="error3"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="type"> Type: </label> </td>
+                                <td><input type="radio" name="type" value="local" checked> Local
+                                    <input type="radio" name="type" value="international"> International</td>
+                            </tr>
+                            <tr>
+                                <td><br></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" value="Ajouter"> <input type="reset" id="reset"></td>
+                            </tr>
+                        </table>
+                    </form>
+
+                    <button id="close"> Fermer la fen&ecirc;tre </button>
+                </div>
+                <!-- end pane -->
+            </div>
+            <!-- end pane-group -->
+        </div>
+        <!-- end window-content -->
+    </div>
+    <!-- end app .window -->
+
+    <!-- Jquery <script> insertion-->
+    <script>
+        window.$ = window.jQuery = require('../scripts/jquery.js');
+    </script>
+    <script src="../scripts/newfourni.js"></script>
+
+
+</body>
+
+</html>

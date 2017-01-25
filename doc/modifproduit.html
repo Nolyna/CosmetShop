@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <title> MAGASIN </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../css/photon.min.css">
+</head>
+
+<body>
+
+    <div class="window">
+
+        <!-- header of the app goes inside -->
+        <header class="toolbar toolbar-header">
+            <h1 class="title">Cosmet Shop</h1>
+        </header>
+
+        <!-- Your app's content goes inside .window-content -->
+        <div class="window-content">
+
+            <div class="pane-group">
+                <div class="pane">
+
+                    <h3> Modifier un produit</h3>
+                    <br><br>
+
+                    <!-- formulaire d'ajout des produits-->
+                    <form id="modifprod">
+                        <table>
+                            <tr>
+                                <td><input type="text" id="id" hidden></td>
+                            </tr>
+                            <tr>
+                                <td><label for="nom"> Nom: </label> </td>
+                                <td> <input id="nom" type="text"> </td>
+                                <td id="error"></td>
+                            </tr>
+                            <tr>
+                                <td> <label for="type"> Type: </label></td>
+                                <td> <select id="type"></select> </td>
+                            </tr>
+                            <tr>
+                                <td> <label for="forme"> Forme: </label></td>
+                                <td> <select id="forme"></select> </td>
+                            </tr>
+                            <tr>
+                                <td> <label for="descr"> Description: </label></td>
+                                <td> <textarea id="descr"></textarea> </td>
+                            </tr>
+                            <tr>
+                                <td> <label for="qte"> Quantit&eacute;:</label></td>
+                                <td> <input id="qte" type="number" min="0" value="0"> </td>
+                            </tr>
+                            <tr>
+                                <td> <label for="achat"> Prix d'achat: </label></td>
+                                <td> <input id="achat" type="text"> </td>
+                                <td id="error2"></td>
+                            </tr>
+                            <tr>
+                                <td> <label for="vente"> Prix de vente:</label></td>
+                                <td> <input id="vente" type="text"> </td>
+                                <td id="error3"></td>
+                            </tr>
+
+                            <tr>
+                                <td><br></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input id="submit" type="submit" value="Modifier"> <input id="close" type="reset" " value="Annuler "></td>
+                            </tr>
+                        </table>
+                    </form>
+
+                </div>
+                <!-- end pane -->
+            </div>
+            <!-- end pane-group -->
+        </div>
+        <!-- window-content -->
+
+        <!-- footer of the app goes inside -->
+        <footer class="toolbar toolbar-footer ">
+            <h1 class="title ">Footer</h1>
+        </footer>
+    </div>
+    <!-- end window -->
+
+    <!-- Jquery <script> insertion-->
+    <script>
+        window.$ = window.jQuery = require('../scripts/jquery.js');
+    </script>
+    <script src="../scripts/modifproduit.js "></script>
+</body>
+
+</html>

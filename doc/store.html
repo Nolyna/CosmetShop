@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <title>PRODUIT </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../css/photon.min.css">
+</head>
+
+<body>
+    <div class="window">
+
+        <!-- header of the app goes inside -->
+        <header class="toolbar toolbar-header">
+            <h1 class="title">Cosmet Shop</h1>
+        </header>
+
+        <!-- Your app's content goes inside .window-content -->
+        <div class="window-content">
+
+            <div class="pane-group">
+                <div class="pane">
+
+                    <h1 id="bonjour"> </h1>
+                    <!-- formulaire pour permettre la recherche des produits-->
+                    <table>
+                        <tr>
+                            <td>
+                                <form id="search">
+                                    Rechercher:
+                                    <input type="search">
+                                    <input type="submit" value="recherche">
+                                </form>
+                            </td>
+                            <td>
+                                <!-- formulaire pour permettre de filtrer l'affichage des produits-->
+                                <form id="filtre">
+                                    Trier par:
+                                    <select name="filter">
+                                        <option value="choix"> choisir </option>
+                                        <option value="nom"> Nom </option>
+                                        <option value="dateexp"> Date d'expiration </option>
+                                        <option value="qte"> Quantit&eacute; </option>
+                                        <option value="price"> Prix de vente </option>
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- Afficher la liste des produits-->
+                    <table class="listeProduits">
+                        <thead>
+                            <tr>
+                                <th>N </th>
+                                <th>Nom </th>
+                                <th>Forme</th>
+                                <th>Type</th>
+                                <th>Quantit&eacute;</th>
+                                <th>Date d'expiration</th>
+                                <th>Prix de vente</th>
+                                <th colspan="3">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                    <footer>
+                        <button id="retour" onclick="Javascript:window.document.location.href=`../index.html`;"> Retour &agrave; la page principale </button>
+                    </footer>
+
+                </div>
+                <!-- end pane -->
+            </div>
+            <!-- end pane-group -->
+        </div>
+        <!-- window-content -->
+
+        <!-- footer of the app goes inside -->
+        <footer class="toolbar toolbar-footer">
+            <h1 class="title">Footer</h1>
+        </footer>
+    </div>
+    <!-- end window -->
+
+    <!-- Jquery <script> insertion-->
+    <script>
+        window.$ = window.jQuery = require('../scripts/jquery.js');
+    </script>
+    <!-- <script> require("../scripts/vue.js")</script> -->
+    <script src="../scripts/store.js"></script>
+
+    <script>
+        
+        function transfer(qteH,nom,idp) {
+            var qteH = $(this).attr('id');
+            var nom = $(this).attr('name');
+            var dialog = confirm("\312tes vous s\373re de vouloir transf\351rer " + nom + "  depuis la maison");
+            if (dialog == true) {
+                var dialog2 = prompt("Entrer la quantit\351 de " + nom + " a transf\351rer");
+                if (dialog2 != null) {
+                    if ($.isNumeric(dialog2)) {
+                        if (dialog2 <= qteH) {
+                            var transfer = { id: idp, qte: dialog2 }
+                            ipcRenderer.send('transfer-Produit', transfer);
+                            UpdateTable();
+                            alert('Transfer Effectu\351 ');
+                        } else {
+                            alert('Impossible de transf\351rer, seulement ' + qteH + ' produits sont disponible');
+                            event.preventDefault();
+                        }
+                    } else {
+                        alert('Entrer un nombre');
+                        event.preventDefault();
+                    }
+                }
+            }
+        }
+    
+        function vendre(qteS,nom,idp) {
+            var qteS = $(this).attr('id');
+            var nom = $(this).attr('name');
+            var dialog = prompt("Entrer la quantit\351 de " + nom + " vendu");
+            if (dialog != null) {
+                if ($.isNumeric(dialog)) {
+                    if (dialog <= qteS) {
+                        var vente = { id:idp, qte: dialog }
+                        ipcRenderer.send('addvente', vente);
+                        UpdateTable();
+                        alert('Vente enregistr\351e ');
+                    } else {
+                        alert('Impossible, seulement ' + qteS + ' produits sont disponible');
+                        event.preventDefault();
+                    }
+                } else {
+                    alert('Entrer un nombre');
+                    event.preventDefault();
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

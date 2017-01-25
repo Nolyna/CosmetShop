@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <title>Type and Forme</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../css/photon.min.css">
+</head>
+
+<body>
+    <!-- Wrap your entire app inside .window -->
+    <div class="window">
+
+        <!-- Wrap header inside  -->
+        <header class="toolbar toolbar-header">
+            <h1 class="title">Cosmet Shop</h1>
+        </header>
+
+        <div class="window-content">
+
+            <div class="pane-group">
+                <div class="pane">
+
+                    <h1 id="bonjour"> </h1>
+                    <form id="modif_Tyfo">
+                        <table>
+                            <tr>
+                                <td><input type="text" id="id" hidden></td>
+                            </tr>
+                            <tr>
+                                <td><label for="name">Nom: </label></td>
+                                <td><input type="text" id="name"></td>
+                                <td id="error"></td>
+                            </tr>
+                            <tr>
+                                <td><br></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" value="Modifier"> <input type="reset" value="Annuler"></td>
+                            </tr>
+                        </table>
+                    </form>
+
+                </div>
+                <!-- end pane -->
+            </div>
+            <!-- end pane-group -->
+        </div>
+        <!-- end window-content -->
+    </div>
+    <!-- end app .window -->
+
+    <!-- Jquery <script> insertion-->
+    <script>
+        window.$ = window.jQuery = require('../scripts/jquery.js');
+    </script>
+
+    <script type="text/javascript">
+        const ipcRenderer = require('electron').ipcRenderer;
+
+        $(document).ready(function() {
+            var x;
+            ipcRenderer.on('changeTyFo-reply', function(Object, arg) {
+                x = arg;
+                if (x === 'T') {
+                    $('#bonjour').html('Modifier le type de produit');
+                } else if (x === 'F') {
+                    $('#bonjour').html('Modifier la forme de produit');
+                } else {
+                    alert("Une erreur s'est produite, Veuillez cliquez sur le bouton annuler et r\351essayer");
+                    $('#name').prop("disabled", true);
+                    $(':submit').prop("disabled", true);
+                }
+            })
+
+            ipcRenderer.on('modiTyFo-reply', function(Object, arg) {
+                if (typeof arg === 'object') {
+                    $('#id').val(arg.id);
+                    $('#name').val(arg.nom);
+                } else {
+                    alert("Une erreur s'est produite, Veuillez cliquez sur le bouton annuler et r\351essayer");
+                    $('#name').prop("disabled", true);
+                    $(':submit').prop("disabled", true);
+                }
+            })
+
+            $("#modif_Tyfo").submit(
+                function(event) {
+                    if ($("#name").val() == '') {
+                        $("#error").text('Veuillez remplir le champ').show().fadeOut(3000);
+                        event.preventDefault();
+                    } else {
+                        var genre = {
+                            id: $("#id").val(),
+                            nom: $("#name").val(),
+                        }
+                        if (x === 'T') {
+                            ipcRenderer.send('updateType', genre);
+                        } else {
+                            ipcRenderer.send('updateForme', genre);
+                        }
+                        ipcRenderer.send('update-typeforme');
+                        alert('Modification effectu\351e');
+                        $(":reset").click();
+                    }
+                });
+
+            $(":reset").click(
+                function(event) {
+                    ipcRenderer.send('display-changeTyFo1');
+                }
+            );
+        });
+    </script>
+
+</body>
+
+</html>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<link rel="import" href="header.html">
+
+<body>
+    <div class="window">
+
+        <div class="window-content">
+            <div class="pane-group">
+                <div class="pane">
+
+                    <form id="transfer">
+                        <p> Entrer la quantit\351 a transf\351rer </p>
+                        <input id='qte' type="text">
+                        <p id='error'></p>
+                        <input type="submit" value="Transferer">
+                        <input type="reset" value="Annuler">
+                    </form>
+
+                </div>
+                <!-- end pane -->
+            </div>
+            <!-- end pane-group -->
+        </div>
+        <!-- window-content -->
+    </div>
+    <!-- end window -->
+
+    <!-- Jquery <script> insertion-->
+    <script>
+        window.$ = window.jQuery = require('../scripts/jquery.js');
+    </script>
+    <script>
+        ipcRenderer.on('transfer1-reply', function(Object, arg) {
+            qtt = arg.id;
+            qtedispo = arg.qtedispo
+        });
+
+        $("#transfer").submit(
+            function(event) {
+                dialog2 = $("#qte").val();
+                if (dialog2 != '') {
+                    if ($.isNumeric(dialog2)) {
+                        if (dialog2 <= qtedispo) {
+                            var transfer = {
+                                id: qtt,
+                                qte: dialog2
+                            }
+                            ipcRenderer.send('transfer-Produit', transfer);
+                            UpdateTable();
+                            alert('Transfer Effectu\351 ');
+                        } else {
+                            alert('Impossible de transf\351rer, seulement ' + qtedispo + ' produits sont disponible');
+                            event.preventDefault();
+                        }
+                    } else {
+                        alert('Entrer un nombre');
+                        event.preventDefault();
+                    }
+                } else {
+                    $("#error").text('Remplir le champ').show().fadeOut(3000);
+                    event.preventDefault();
+                }
+            });
+
+        $(":reset").click(
+            function(event) {
+                ipcRenderer.send('display-transferProduit');
+            }
+        );
+    </script>
+</body>
+
+</html>

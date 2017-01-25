@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <title>PRODUIT </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../css/photon.min.css">
+</head>
+
+<body>
+    <div class="window">
+
+        <!-- header of the app goes inside -->
+        <header class="toolbar toolbar-header">
+            <h1 class="title">Cosmet Shop</h1>
+        </header>
+
+        <!-- Your app's content goes inside .window-content -->
+        <div class="window-content">
+
+            <div class="pane-group">
+                <div class="pane">
+
+                    <h1 id="bonjour"> </h1>
+                    <!-- formulaire pour permettre la recherche des produits-->
+                    <table>
+                        <tr>
+                            <td>
+                                <form id="search">
+                                    Rechercher:
+                                    <input id='searchvalue' type="search">
+                                    <input type="submit" value="recherche">
+                                </form>
+                            </td>
+                            <td>
+                                <!-- formulaire pour permettre de filtrer l'affichage des produits-->
+                                <form id="filtre">
+                                    Trier par:
+                                    <select name="filter">
+                                        <option value="choix"> choisir </option>
+                                        <option value="nom"> Nom </option>
+                                        <option value="dateexp"> Date d'expiration </option>
+                                        <option value="qte"> Quantit&eacute; </option>
+                                        <option value="price"> Prix </option>
+                                         <option value="tpe"> Type </option>
+                                          <option value="formeP"> Forme </option>
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- Afficher la liste des produits-->
+                    <table class="listeProduits">
+                        <thead>
+                            <tr>
+                                <th>N </th>
+                                <th>Nom </th>
+                                <th>Type</th>
+                                <th>Forme</th>
+                                <th>Quantit&eacute;</th>
+                                <th>Date d'expiration</th>
+                                <th>Prix de vente</th>
+                                <th colspan="3">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                    <!-- bouton d'action sur les fournisseurs-->
+                    <button id="add"> Ajouter un produit </button>
+
+                    <footer>
+                        <button id="retour" onclick="Javascript:window.document.location.href=`../index.html`;"> Retour &agrave; la page principale </button>
+                    </footer>
+
+                </div>
+                <!-- end pane -->
+            </div>
+            <!-- end pane-group -->
+        </div>
+        <!-- window-content -->
+
+        <!-- footer of the app goes inside -->
+        <footer class="toolbar toolbar-footer">
+            <h1 class="title">Footer</h1>
+        </footer>
+    </div>
+    <!-- end window -->
+
+    <!-- Jquery <script> insertion-->
+    <script>
+        window.$ = window.jQuery = require('../scripts/jquery.js');
+    </script>
+    <script src="../scripts/home.js"></script>
+    <script>
+        function transfer(qteH, nom, qtt) {
+            var dialog = confirm("\312tes vous s\373re de vouloir transf\351rer " + nom + "  au magasin");
+            if (dialog == true) {
+                var transfer = {
+                    id: qtt,
+                    qtedispo: qteH
+                }
+                ipcRenderer.send('display-transferProduit');
+                ipcRenderer.send('transfer1', transfer);
+            }
+        }
+
+        function addQte(id) {
+            ipcRenderer.send('display-transferProd');
+            ipcRenderer.send('SelectProduitQte', id);
+        }
+
+        function vendre(qteS, nom, idp) {
+            var qteS = $(this).attr('id');
+            var nom = $(this).attr('name');
+            var vente = {
+                id: idp,
+                qte: qteS
+            }
+            ipcRenderer.send('addvente1', vente);
+            ipcRenderer.send('display-venteProduit');
+
+        }
+    </script>
+</body>
+
+</html>

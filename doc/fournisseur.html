@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <title>FOURNISSEUR </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../css/photon.min.css">
+    <link rel="stylesheet" href="../css/default.css">
+
+</head>
+
+<body>
+    <div class="window">
+
+        <!-- header of the app goes inside -->
+        <header class="toolbar toolbar-header">
+            <h1 class="title">Cosmet Shop</h1>
+        </header>
+
+        <!-- Your app's content goes inside .window-content -->
+        <div class="window-content">
+
+            <div class="pane-group">
+                <div class="pane">
+
+                    <h1 id="bonjour"> </h1>
+                    <table>
+                        <tr>
+                            <td>
+                                <!-- formulaire pour permettre la recherche des fournisseurs-->
+                                <form id="search">
+                                    <input type="search" placeholder="Rechercher" id='textsearch'>
+                                    <input type="submit" value="recherche">
+                                    <div id="error"></div>
+                                </form>
+                            </td>
+                            <td>
+                                <!-- formulaire pour permettre de filtrer l'affichage des fournisseurs-->
+                                <form id="filtre">
+                                    Trier par:
+                                    <select name="filter" id="filter">
+                                        <option value="base">Choisir</option>
+                                        <option value="nom">Nom</option>
+                                        <option value="tpe">Type</option>
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                    </br>
+                    <!-- Afficher la liste des fournisseurs-->
+                    <table class="listeFournisseur">
+                        <thead>
+                            <tr>
+                                <th>N </th>
+                                <th>Nom </th>
+                                <th>Adresse email</th>
+                                <th>Telephone</th>
+                                <th>Type</th>
+                                <th colspan="2">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <td valign="bottom" align="right" colspan="7"><button id="add"> Ajouter un fournisseur </button></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <!-- bouton d'action sur les fournisseurs-->
+
+                    <!--button id="modif" onclick="Javascript:window.document.location.href=`doc/home.html`;"> Modifier un fournisseur </button>
+                    <button id="delete" onclick="Javascript:window.document.location.href=`doc/products.html`;"> Supprimer un fournisseur </button-->
+
+                    <a class="button backbutton" id="retour" href="../index.html"> Retour &agrave; la page principale </a>
+                </div>
+                <!-- end pane -->
+            </div>
+            <!-- end pane-group -->
+        </div>
+        <!-- window-content -->
+
+        <footer class="toolbar toolbar-footer">
+
+        </footer>
+    </div>
+    <!-- end window -->
+
+    <!-- Jquery <script> insertion-->
+    <script>
+        window.$ = window.jQuery = require('../scripts/jquery.js');
+    </script>
+    <!-- <script> require("../scripts/vue.js")</script> -->
+    <script src="../scripts/fournisseur.js"></script>
+    <script>
+        function modify(id) {
+            ipcRenderer.send('display-changeFournisseur');
+            ipcRenderer.send('SelectFournisseur', id);
+        }
+
+        function suppression(id, nom, prenom) {
+            var dialog = confirm("\312tes vous s\373re de vouloir supprimer " + nom + " " + prenom + " ?");
+            if (dialog == true) {
+                ipcRenderer.send('delete-Fournisseur', id);
+                ipcRenderer.send('update-fpage');
+                alert('Suppression effectu\351e ');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
